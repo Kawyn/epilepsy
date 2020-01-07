@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Witam</title>
+    </head>
+    <body>
+
+        <script>
+            var colors = ["white", "black"];
+            var step = 0;
+
+            Update();
+
+            function Update() {
+    
+                step++
+                if(step > 2)
+                    step = 0;
+                document.body.style.backgroundColor = colors[step];
+
+                setTimeout(function() { Update(); }, 7);
+            }
+        </script>
+    </body>
+</html>
