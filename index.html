@@ -2,12 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="author" content="Kawyn" />
         <title>Witam</title>
     </head>
     <body>
-
         <script>
-            var colors = ["white", "black"];
+            var colors = ["#FF00FF", "#FFEF00", "#FFFDD0", "#7FFFD4", "#000000"];
             var step = 0;
 
             Update();
@@ -15,11 +15,14 @@
             function Update() {
     
                 step++
-                if(step > 2)
+
+                if(step > colors.length)
                     step = 0;
+
+
                 document.body.style.backgroundColor = colors[step];
 
-                setTimeout(function() { Update(); }, 7);
+                setTimeout(function() { Update(); }, 10);
             }
         </script>
     </body>
