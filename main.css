@@ -1,0 +1,314 @@
+* {
+
+    overflow: hidden;
+    font-family: Consolas, monaco, monospace;
+}
+*:focus {
+
+    outline: none;
+}
+
+
+
+/*================================================================*/
+body {
+
+    margin: 0;
+
+    padding: 0;
+}
+
+div {
+
+    cursor: default;
+}
+
+footer { 
+
+    display: block;
+    
+    position: absolute;
+    z-index: 50;
+
+    bottom: 20px;
+
+    width: 100%;
+
+    color: #CCCCCC;
+    text-align: center;
+}
+
+hr {
+
+    margin-bottom: 50px;
+
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+    box-shadow: 0px 2px 20px 0px #A0A0A0;
+}
+
+h2 {
+    
+    text-align: center;
+}
+
+input, select {
+              
+    width: 200px;
+
+    padding-right: 5px;
+
+    background-color: #00000000;
+    border: none;
+    border-bottom: 2px solid #A0A0A0;
+
+    color:  #A0A0A0;
+    font-size: 20px;
+    text-align: right;
+    font-weight: bolder;
+}
+
+select::-webkit-outer-spin-button, select::-webkit-inner-spin-button, input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+ 
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+ 
+    -moz-appearance: textfield;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+
+    border: none;
+}
+
+/*================================================================*/
+#fade {
+    display: none;
+    
+    position: absolute;
+    z-index: 100;
+
+    width: 100%;
+    height: 100%;
+
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+    animation-name: fade;
+    animation-duration: 4s;
+}
+
+#overlay {
+
+    position: absolute;
+    z-index: 10;
+    
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: white;
+}
+
+#warning {
+
+    position: absolute;
+
+    top: 25%;
+    left: 15%;
+    
+    height: 40%;
+    width: 70%;
+  
+    background-color: white;
+}
+#warning > h1 {
+
+    padding: 0 0 15px 20%;
+
+    background-color: white;
+
+    color: #4F4F4F;
+    font-size: 45px;
+}
+#warning > p {
+
+    background-color: white;
+
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 20px;
+}
+#warning > div { 
+
+    cursor: pointer;                
+
+    position: relative;
+    z-index: 15;
+
+    left: 65%;
+
+    width: 250px;
+
+    padding-top: 75px;
+    
+    background-color: white;
+
+    color: #A0A0A0;
+    font-size: 25px;
+}
+
+#menu {
+    -webkit-animation-play-state: paused;
+    animation-name: slideIn;
+    animation-duration: 1.5s;
+
+    overflow: visible;
+    position: absolute;
+
+    left: calc(100% - 20% - 2px - 40px);
+    right: 0px;
+
+    width: 20%;
+    height: 100%;
+
+    margin: 0;
+
+    padding: 0 20px;
+
+    background-color: whitesmoke;
+    border-left: 2px solid #CCCCCC;
+    box-shadow: -2px 0 20px 0px #A0A0A0;
+
+    font-size: 20px;
+}
+#menu > h1 {
+
+    margin: 10px;
+
+    color: #4F4F4F;
+    font-size: 45px;
+    text-shadow: 2px 2px 3px #4F4F4F;
+}
+#menu > p {
+
+    color: grey;
+}   
+#menu > p:first-of-type::first-letter {
+    
+    padding-left: 20px;
+}
+
+#palette {
+
+    display: grid;
+
+    height: 160px;
+
+    grid-template-columns: repeat(9, 35px);
+    grid-template-rows: repeat(4, 35px);
+    grid-gap: 5px;
+}
+#palette input {
+   
+    width: 100%;
+    height: 100%;
+   
+    margin:0;
+   
+    padding:0;
+   
+    border:0;
+    border: 2px solid #CCCCCC;
+   
+    color:  #A0A0A0;
+    text-align: center;
+}
+
+#share, #play {
+
+    width: auto;
+
+    padding-right: 10%;
+  
+    border: none;
+    
+    font-size: 30px;
+    font-style: italic;
+    text-shadow: 2px 2px 3px #888;
+}
+
+#slider {
+    cursor: pointer;
+
+    position: absolute;
+    
+    top:calc(50% - 75px); 
+
+    margin-left: -125px; 
+    
+    opacity:5%;
+
+    font-size: 150px;   
+    text-shadow: 5px 5px 15px black;
+}
+#slider:hover {
+
+    opacity: 15%;
+}
+
+
+
+/*================================================================*/
+.cookie {
+
+    margin-top: 55px;
+
+    color: #CCC;
+    font-size: 12px !important;
+}
+
+.input {
+                
+    color:  #A0A0A0;
+    margin: 10px;
+}
+.input > hr:first-of-type {
+
+    margin-bottom: 18px;
+}
+
+      
+
+/*================================================================*/
+@keyframes fade {
+    to {
+        background-color: #000;
+        color: #000;
+    }
+}
+@keyframes slideIn {
+    from {
+        left: calc(100% - 20% - 2px - 40px);
+    }
+    to {
+        left: 100%;
+    }
+}
+@keyframes slideOut {
+    from {
+        left: 100%;
+    }
+    to {
+        left: calc(100% - 20% - 2px - 40px);
+    }
+}

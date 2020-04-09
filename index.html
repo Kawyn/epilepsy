@@ -2,28 +2,342 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="description" content="This website allows you to check if you have epilepsy">
+        <meta name="keywords" content="epilepsy,editor,colors">
         <meta name="author" content="Kawyn" />
-        <title>epilepsy</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+        <title>.epilepsy</title>
+
+        <link rel="stylesheet" type="text/css" href="main.css" />
     </head>
-    <body>
+    <body onselectstart="return false;">
+  
+        <!-- FADE -->
+        <div id="fade"></div>
+
+        <!-- WARNING -->
+        <div id="overlay" onload="if (document.cookie) fields.overlay.style.display = 'none';">
+            <div id="warning">
+                <h1>.warning</h1>
+                <p>This page may contains fast flashing images.</p> 
+                <p>It may cause discomfort and trigger seizures for people with photosensitive epilepsy.</p> 
+                <div onclick="document.cookie = 'https:\/\/www.youtube.com\/watch?v=sAn7baRbhx4&ab_channel=NazNomad'; if (window.location.href.includes('?')) { fade(); setVarialbes(); play(); } else { fields.overlay.style.display = 'none'; }">I don't care...</div>
+
+                <p class="cookie">This website uses cookie to remember that you have already seen this warning.</p>
+            </div>
+        </div>
+
+
+        <h2 id="message" style="position: absolute; text-align: center; font-size: 150px; width: 100%; top: calc(50% - 150px); margin:0px; padding: 0px;" hidden="true">.epilepsy</h2>
+        <div id="menu">
+            <h1>.epilepsy</h1>
+            <p>Here you can create your own <i><b>AMAZING</b></i> and <i><b>UNIQUE</b></i> effect that will check if you suffer from photosensitive epilepsy.</p>
+            <hr />
+
+            <div class="input" title="don't work">mode:&nbsp;&nbsp;&nbsp;
+                <select id="mode" onchange="changeMode()">
+                    <option value="0" selected>default</option>
+                    <option value="1">text</option>
+                </select>
+            </div>
+            <div class="input" id="text" hidden >text:&nbsp;&nbsp;&nbsp;
+                <input type="text" id="msg" style="text-align: left;" value=".epilepsy" oninput="document.getElementById('message').textContent = document.getElementById('msg').value; console.log(document.getElementById('msg').value)"/></div>
+
+
+            <div class="input" title="time between refreshes (ms)">interval:<input type="number" id="interval" value="30"/></div>
+
+            <div class="input">colors:<hr />
+            <div id="palette">
+                <div class="color"><input type="color" value="#000000"/></div>
+                <div class="color"><input type="color" value="#FFFFFF"/></div>
+                <div><input type="button" value="+" onclick="addColor(2)" /></div>
+            </div>
+        </div><hr />
+            <div style="padding-left: calc(45% - 80px); padding-bottom: 20px;"> <input type="button" value="play" id="play" onclick="x()" />
+            <input type="button" id="share" value="share" onclick="share()" />
+        </div>
+            <hr />
+            <p id="alert" style="text-align: center;" hidden>Copied to clipboard</p>
+
+            <!-- BIG ARROW -->
+            <div id="slider" onclick="slide()">&gt;</div>
+        </div>
+     
+        <footer id="footer">.epilepsy by Kawyn</footer>
+
+
         <script>
-            var colors = ["#FF00FF", "#FFEF00", "#FFFDD0", "#7FFFD4", "#000000"];
-            var step = 0;
+         const message = document.getElementById('message');
+            // fields
+            const fields = {
 
-            Update();
+                fade: document.getElementById('fade'),
+                footer: document.getElementById('footer'),
+                interval: document.getElementById('interval'),
+                menu: document.getElementById('menu'),
+                mode: document.getElementById('mode'),
+                overlay: document.getElementById('overlay'),
+                palette: document.getElementById('palette'),
+                slider: document.getElementById('slider'),
+            };
+            
+            // variables
+            var colors = ['#000000', '#FFFFFF'];
+            var out = true;
 
-            function Update() {
+
+            function fade() {
+                        
+                fields.fade.style.display = 'block';
+                fields.fade.style.webkitAnimationPlayState = 'running';
+
+                setTimeout(() => {
+
+                    fields.fade.style.display = 'none';
+                   
+                    // blah
+                    overlay.style.display = 'none'; 
+                    footer.style.display = 'none';
+                }, 3950);
+            }
+
+
+
+
+
+
+
+            var interval = undefined;
+var step = 0;
+
+
+
+// Functions...
+function display() {    
+
+    // Modes..
+    if (mode.value == 1)
+        message.style.color = colors[step];
+
+
+    // Next...
+    step++;
+
+    if(step > colors.length)
+        step = 0;
+
     
-                step++
-
-                if(step > colors.length)
-                    step = 0;
+    document.body.style.backgroundColor = colors[step];
+}
 
 
-                document.body.style.backgroundColor = colors[step];
+function play() {
 
-                setTimeout(function() { Update(); }, 10);
+    footer.style.display = 'none';
+    interval = setInterval(() => { display(); }, fields.interval.value);
+}
+function pause() {
+
+    clearInterval(interval);
+    interval = undefined;
+
+
+    if (fields.mode.value == 1)
+        message.style.color = '#000';
+
+
+    footer.style.display = 'block';
+    document.body.style.backgroundColor = '#FFF';
+}
+
+
+
+
+
+
+
+
+            if (window.location.href.includes('?')) {
+             
+            getVariablesFromUri();     
+                slide();
+            }
+            
+ 
+
+            const url = document.getElementById('url');
+
+
+            function changeMode() {
+
+                if (fields.mode.value == 1) {
+
+                    document.getElementById('text').removeAttribute('hidden');
+                    message.removeAttribute('hidden', 'true');
+                }
+                else {
+                    document.getElementById('text').setAttribute('hidden', 'true');
+                    message.setAttribute('hidden', 'true');
+                }
+            }
+
+
+      
+          
+
+
+           
+            function getVariablesFromUri() {
+
+                const variables = {};
+                window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(x, key, value) {
+                    variables[key] = value;
+                });
+            
+                console.log(variables);
+
+                // mode
+                fields.mode.value = variables['mode'];
+                changeMode();
+
+                // interval
+                fields.interval.value = variables['interval'];
+
+
+                // text
+                if ('text' in variables) {
+                    message.textContent = variables['text'];
+                    document.getElementById('msg').value = variables['text'];
+                }
+
+                // colors
+                variables['colors'] = variables['colors'].split(',');
+
+                for (var i = 0; i < variables['colors'].length; i++) {
+                        // add fields
+                        if (i == fields.palette.children.length - 1) {
+                       
+                            colors[i] = variables['colors'][i];
+                            addColor(i);
+                        }
+
+                        fields.palette.children[i].children[0].value = variables['colors'][i];
+                    }
+            }
+
+
+            function setVarialbes() {
+
+                for (var i = 0; i < colors.length; i++)
+                    colors[i] = palette.children[i].children[0].value;
+            }
+
+
+
+           
+   
+ 
+
+
+        
+            function share() {
+
+                setVarialbes();
+
+                let uri = window.location.href;
+                
+                if (uri.includes('?'))
+                    uri = uri.substring(0, uri.indexOf('?'))
+
+                uri += '?mode=' + fields.mode.value
+
+                if (fields.mode.value == 1)
+                    uri += '&text=' + message.textContent;
+
+                uri += '&interval=' + fields.interval.value;
+                uri += '&colors=';
+
+
+                for (const i in colors) {
+
+                    uri += colors[i];
+
+                    if (i != colors.length - 1)
+                        uri  += ',';
+                }
+
+
+                // DISPLAY IT...
+                encodeURI(uri);
+
+                //#region COPY
+                
+                    const tmp = document.createElement('textarea');
+                    tmp.value = uri;
+                    document.body.appendChild(tmp);
+                    tmp.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tmp);
+                    document.getElementById('alert').removeAttribute('hidden');
+                //#endregion
+            }
+ 
+            function x() {
+                setVarialbes()
+                  if (interval === undefined)
+                      play();
+                  else 
+                      pause();
+            }
+
+            document.addEventListener('keydown', (event) => {
+
+                if (event.keyCode === 27) x();
+            });
+
+
+
+        
+           
+            // EFFECTS
+            function slide() {
+
+                if (menu.style.webkitAnimationPlayState == 'running')
+                    return;
+
+
+                fields.menu.style.animationName = out ?  'slideIn' : 'slideOut' ;
+                fields.menu.style.webkitAnimationPlayState = 'running';
+
+                setTimeout(() => {
+
+                    fields.menu.style.webkitAnimationPlayState = 'paused';
+
+                    fields.slider.textContent = out ? '<' : '>';
+                    out = !out;
+                }, 1450);
+            }
+            function addColor(index) {
+
+
+                const c = palette.children[index];
+
+                c.children[0].remove();    
+                const n = document.createElement('input');
+                c.appendChild(n);
+                n.setAttribute('type', 'color');
+                c.setAttribute('class', 'color');
+        
+                const field = document.createElement('div');
+                palette.appendChild(field);
+                var button = document.createElement('input');
+                field.appendChild(button);
+                button.setAttribute('type', 'button');
+                button.setAttribute('value', '+');
+                button.setAttribute('onclick', 'addColor(' + (index + 1) + ')');
+                colors.push(n.value);
             }
         </script>
     </body>
-</html>
+</html> 
